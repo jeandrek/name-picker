@@ -26,19 +26,27 @@ function createCode(names) {
 		anyEqual = true;
 	if (!anyEqual) break;
     }
-    console.log(assignment);
 
-    return btoa(shiftBackward(JSON.stringify(assignment)));
+    return encode(JSON.stringify(assignment));
 }
 
 function pickName(code, giver) {
-    var assignment = JSON.parse(shiftForward(atob(code)));
+    var assignment = JSON.parse(decode(code));
     return assignment[giver];
 }
 
 function getNames(code) {
-    var assignment = JSON.parse(shiftForward(atob(code)));
+    var assignment = JSON.parse(decode(code));
     return Object.keys(assignment);
+}
+
+function encode(str) {
+    var numSpaces = Math.floor(Math.random() * 3);
+    return btoa(shiftBackward(" ".repeat(numSpaces) + str));
+}
+
+function decode(str) {
+    return shiftForward(atob(str));
 }
 
 function shiftChars(str, shift) {
