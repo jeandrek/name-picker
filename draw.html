@@ -24,9 +24,9 @@
 	  if (confirm("Please confirm: You are " + giver + ".")) {
 	      document.querySelector("#recipient").innerText =
 		  pickName(code, giver);
+	      document.querySelector("#form").style.display = "none";
+	      document.querySelector("#result").style.display = "";
 	  }
-	  document.querySelector("#form").style.display = "none";
-	  document.querySelector("#result").style.display = "";
       }
     </script>
   </head>
