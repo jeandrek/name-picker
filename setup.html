@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Name picker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="name_picker.js"></script>
+    <script>
+      function setup() {
+	  var names = document.querySelector("#names").value.split("\n");
+	  var link = document.querySelector("#draw-names");
+	  link.style.display = "";
+	  link.href = "/draw.html#" + createCode(names);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Name picker</h1>
+    <div>Enter names (one per line):</div>
+    <textarea id="names" rows="10" cols="33"></textarea>
+    <div><button onclick="setup()">Create code</button></div>
+    <div><a id="draw-names" style="display: none;">Link to draw names</a></div>
+  </body>
+</html>

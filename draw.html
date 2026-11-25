@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Name picker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="name_picker.js"></script>
+    <script>
+      window.onload = function () {
+	  var code = window.location.hash.substring(1);
+	  document.querySelector("#code").innerText = code;
+	  var names = getNames(code);
+	  var dropdown = document.querySelector("#dropdown");
+	  for (var name of names) {
+	      var option = document.createElement("option");
+	      option.innerText = name;
+	      dropdown.appendChild(option);
+	  }
+      };
+      function draw() {
+	  var giver = document.querySelector("#dropdown").value;
+	  var code = window.location.hash.substring(1);
+	  if (confirm("Please confirm: You are " + giver + ".")) {
+	      document.querySelector("#recipient").innerText =
+		  pickName(code, giver);
+	  }
+	  document.querySelector("#form").style.display = "none";
+	  document.querySelector("#result").style.display = "";
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Name picker</h1>
+    <pre id="code"></pre>
+    <div id="form">
+      <div>
+	You are:
+	<select id="dropdown"></select>
+      </div>
+      <button onclick="draw()">Draw</button>
+    </div>
+    <div id="result" style="display: none;">
+      You are giving a gift to:
+      <strong><span id="recipient"></span></strong>
+    </div>
+  </body>
+</html>
