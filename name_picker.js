@@ -28,15 +28,24 @@ function createCode(names) {
     }
     console.log(assignment);
 
-    return btoa(JSON.stringify(assignment));
+    return btoa(shiftBackward(JSON.stringify(assignment)));
 }
 
 function pickName(code, giver) {
-    var assignment = JSON.parse(atob(code));
+    var assignment = JSON.parse(shiftForward(atob(code)));
     return assignment[giver];
 }
 
 function getNames(code) {
-    var assignment = JSON.parse(atob(code));
+    var assignment = JSON.parse(shiftForward(atob(code)));
     return Object.keys(assignment);
 }
+
+function shiftChars(str, shift) {
+    return str.split("")
+	      .map(ch => String.fromCharCode(ch.charCodeAt(0) + shift))
+	      .join("");
+}
+
+function shiftBackward(str) { return shiftChars(str, -1); }
+function shiftForward(str) { return shiftChars(str, 1); }
